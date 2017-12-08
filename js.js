@@ -1,3 +1,5 @@
+var datamaster =[];
+
 function httpGetAsync(theUrl, callback)
 {
     var xmlHttp = new XMLHttpRequest();
@@ -11,8 +13,13 @@ function httpGetAsync(theUrl, callback)
 
 function datatransformer(data){
     var a=JSON.parse(data) 
-
-
+    
+    if(datamaster.length>25){
+        datamaster.shift();
+        datamaster.push(a);
+    }else{
+        datamaster.push(a);
+    }
 
     for(var b=0;b<a.length;b++){
         var best1=0;
