@@ -1,6 +1,8 @@
-//1
+//la variable qui va contenir tout les json files pour les comparer entre eux
 var datamaster =[];
 
+
+// fonction pour faire des assync call pour les api 
 function httpGetAsync(theUrl, callback)
 {
     var xmlHttp = new XMLHttpRequest();
@@ -12,9 +14,14 @@ function httpGetAsync(theUrl, callback)
     xmlHttp.send(null);
 }
 
+//la fonction qui est appelé apres le api call(assync).
 function datatransformer(data){
+    // on transforme le json en array.
     var a=JSON.parse(data) 
     
+    // Si la variable qui contient tout les json file est plus grand que 25 (5 minutes),
+    // enleve le premier et ajoute le nouveau.
+    // si non ajoute le nouveau.
     if(datamaster.length>25){
         datamaster.shift();
         datamaster.push(a);
@@ -22,46 +29,14 @@ function datatransformer(data){
         datamaster.push(a);
     }
 
-    for(var b=0;b<a.length;b++){
-        var best1=0;
-        if(a[b].percent_change_1h > best1){
-            best1=a[b].percent_change_1h;
-        }
-    }
 
-    console.log(best1);
-
-    for(var b=0;b<a.length;b++){
-        var best24=0;
-        if(a[b].percent_change_24h > best24){
-             best24=a[b].percent_change_24h;
-        }
-    }
-
-    console.log(best24);
-
-    for(var b=0;b<a.length;b++){
-        var best7=0;
-        if(a[b].percent_change_7d > best7){
-            best7=a[b].percent_change_7d;
-        } 
-    }
-
-    console.log(best7);
-
-    for(var b=0;b<a.length;b++){
-        if(a[b].percent_change_1h <= -5 || a[b].percent_change_24h <= -15 || a[b].percent_change_7d <= -30 ){   
-            console.log(a[b].id);
-            console.log(a[b].percent_change_1h);
-            console.log(a[b].percent_change_24h);
-            console.log(a[b].percent_change_7d);
-        }
-    }
-
+    console.log(datamaster)
 
 }
 
 
-
-httpGetAsync("https://api.coinmarketcap.com/v1/ticker/",datatransformer);
+while (1){
+    httpGetAsync("https://api.coinmarketcap.com/v1/ticker/",datatransformer);
+    setTimeout(function(){}, 3000);
+}
 
