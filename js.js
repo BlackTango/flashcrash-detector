@@ -22,19 +22,24 @@ function datatransformer(data){
     // Si la variable qui contient tout les json file est plus grand que 25 (5 minutes),
     // enleve le premier et ajoute le nouveau.
     // si non ajoute le nouveau.
-    if(datamaster.length>25){
+    if(datamaster.length>30){
         datamaster.shift();
         datamaster.push(a);
     }else{
         datamaster.push(a);
     }
 
-
     console.log(datamaster);
-
 }
 
 function appel(){
     // fait un appel asynk a coin market cap pour avoir tout les prix de tout les coins 
     httpGetAsync("https://api.coinmarketcap.com/v1/ticker/",datatransformer);
 }
+
+
+setInterval(appel,10000);
+
+
+
+
