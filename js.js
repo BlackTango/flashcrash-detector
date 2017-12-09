@@ -34,9 +34,6 @@ function datatransformer(data){
 
 }
 
-
-while (1){
+function appel(){
     httpGetAsync("https://api.coinmarketcap.com/v1/ticker/",datatransformer);
-    setTimeout(function(){}, 3000);
 }
-
