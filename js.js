@@ -30,10 +30,11 @@ function datatransformer(data){
     }
 
 
-    console.log(datamaster)
+    console.log(datamaster);
 
 }
 
 function appel(){
+    // fait un appel asynk a coin market cap pour avoir tout les prix de tout les coins 
     httpGetAsync("https://api.coinmarketcap.com/v1/ticker/",datatransformer);
 }
