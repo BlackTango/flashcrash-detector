@@ -30,6 +30,7 @@ function datatransformer(data){
     }
 
     var crach=[];
+    var fly=[];
 
     for (var a=0;a<datamaster[0].length;a++){
 
@@ -40,22 +41,15 @@ function datatransformer(data){
 
         temp.name=datamaster[0][a].name;
         temp.changement = (datamaster[0][a].price_usd/datamaster[datamaster.length-1][a].price_usd)-1
-        crach.push(temp);
         
+        if (temp.changement>0)fly.push(temp)
+        else crach.push(temp);
     }
+
+    crach.sort();
+
     console.log(crach);
-
-
-
- // console.log("the coin name is : "+datamaster[0][0].name)
-  //console.log("the first price is : "+datamaster[0][0].price_usd)
-  //console.log("the last case is :"+(datamaster.length-1))
-  //console.log("the last price is : "+datamaster[datamaster.length-1][0].price_usd)
-  //console.log("the price div : "+(datamaster[0][0].price_usd/datamaster[datamaster.length-1][0].price_usd))
-
-
-
-
+    console.log(fly);
 }
 
 function appel(){
