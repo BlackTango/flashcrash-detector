@@ -22,14 +22,40 @@ function datatransformer(data){
     // Si la variable qui contient tout les json file est plus grand que 25 (5 minutes),
     // enleve le premier et ajoute le nouveau.
     // si non ajoute le nouveau.
-    if(datamaster.length>30){
+    if(datamaster.length>=30){
         datamaster.shift();
         datamaster.push(a);
     }else{
         datamaster.push(a);
     }
 
-    console.log(datamaster);
+    var crach=[];
+
+    for (var a=0;a<datamaster[0].length;a++){
+
+        var temp={
+            name : "lol",
+            changement : 0
+        };
+
+        temp.name=datamaster[0][a].name;
+        temp.changement = (datamaster[0][a].price_usd/datamaster[datamaster.length-1][a].price_usd)-1
+        crach.push(temp);
+        
+    }
+    console.log(crach);
+
+
+
+ // console.log("the coin name is : "+datamaster[0][0].name)
+  //console.log("the first price is : "+datamaster[0][0].price_usd)
+  //console.log("the last case is :"+(datamaster.length-1))
+  //console.log("the last price is : "+datamaster[datamaster.length-1][0].price_usd)
+  //console.log("the price div : "+(datamaster[0][0].price_usd/datamaster[datamaster.length-1][0].price_usd))
+
+
+
+
 }
 
 function appel(){
